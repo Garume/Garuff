@@ -36,10 +36,10 @@ public class ClickGuiModule extends Module {
 
 	public BooleanSetting thinGui = new BooleanSetting("thinGui", this, false);
 
-	private final ResourceLocation watermark = new ResourceLocation(Garuff.MOD_ID, "textures/postmail.png");
+	private final ResourceLocation watermark = new ResourceLocation(Garuff.MOD_ID, "textures/watermark.png");
 
 	public ClickGuiModule() {
-		super("clickGui", "classic hud", Keyboard.KEY_RSHIFT, Category.CLIENT);
+		super("clickGuiModule", "classic hud", Keyboard.KEY_RSHIFT, Category.CLIENT);
 		this.addSettings(scrollMode,scrolls,description,animationSpeed,opacity,fontColor,enabledColor,backgroundColor,settingBackgroundColor,outlineColor);
 		INSTANCE = this;
 	}
@@ -49,7 +49,7 @@ public class ClickGuiModule extends Module {
 		ScaledResolution sr = new ScaledResolution(mc);
 		if(event.getType() == RenderGameOverlayEvent.ElementType.BOSSHEALTH) {
 			mc.renderEngine.bindTexture(watermark);
-			Gui.drawScaledCustomSizeModalRect(-45, sr.getScaledHeight() - 85, 0, 0, 100, 100, 180, 100, 100, 100);
+			Gui.drawScaledCustomSizeModalRect(sr.getScaledWidth() - 200, sr.getScaledHeight() - 200, 0, 0, 100, 100, 200, 200, 100, 100);
 		}
 	}
 

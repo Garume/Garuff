@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.garume.Garuff.Garuff;
 import com.garume.Garuff.event.events.RenderEvent;
+import com.garume.Garuff.module.modules.client.ClientFont;
 import com.garume.Garuff.module.modules.exploits.EzDupe;
 import com.garume.Garuff.module.modules.exploits.InfinityChat;
 import com.garume.Garuff.module.modules.exploits.RPC;
@@ -14,19 +15,26 @@ import com.garume.Garuff.module.modules.player.NoSlow;
 import com.garume.Garuff.module.modules.player.Sprint;
 import com.garume.Garuff.module.modules.pvp.NotAutoCrystal;
 import com.garume.Garuff.module.modules.render.HalfBright;
+import com.garume.Garuff.ui.HudEditor;
 import com.garume.Garuff.ui.clickgui.ClickGuiModule;
+import com.garume.Garuff.ui.hud.ArrayListt;
 import com.garume.Garuff.util.api.render.JTessellator;
 
 import net.minecraft.client.Minecraft;
+import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 
 public class ModuleManager {
+
+
+    public static ModuleManager INSTANCE;
 	public static ArrayList<Module> modules;
 
 	public ModuleManager() {
 		modules = new ArrayList<>();
 		//client
 		ModuleManager.modules.add(new ClickGuiModule());
+		ModuleManager.modules.add(new ClientFont());
 		//player
 		ModuleManager.modules.add(new Sprint());
 		ModuleManager.modules.add(new NoSlow());
@@ -39,6 +47,10 @@ public class ModuleManager {
 		ModuleManager.modules.add(new NotAutoCrystal());
 		//render
 		ModuleManager.modules.add(new HalfBright());
+		//hud
+		ModuleManager.modules.add(new HudEditor());
+		ModuleManager.modules.add(new ArrayListt());
+        INSTANCE = this;
 
 	}
 
@@ -49,6 +61,12 @@ public class ModuleManager {
 		modules.stream().filter(Module::isToggled).forEach(Module::onRender);
 		Garuff.getInstance().clickGui.render();
 	}
+
+	public static void onKey(InputUpdateEvent event){
+        INSTANCE.modules.forEach( mod -> {
+            if (mod.isToggled()) mod.onKey(event);
+        });
+    }
 
 	public static void onWorldRender(RenderWorldLastEvent event) {
 		Minecraft.getMinecraft().mcProfiler.startSection("postman");

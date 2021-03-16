@@ -12,6 +12,7 @@ import com.garume.Garuff.module.setting.settings.KeybindSetting;
 import com.lukflug.panelstudio.settings.Toggleable;
 
 import net.minecraft.client.Minecraft;
+import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.common.MinecraftForge;
 
 public class Module implements Toggleable{
@@ -39,6 +40,8 @@ public class Module implements Toggleable{
 	public void onUpdate(){}
 
 	public void onRender(){}
+
+	public void onKey(InputUpdateEvent event){}
 
 	public void enable() {
 		setToggled(true);

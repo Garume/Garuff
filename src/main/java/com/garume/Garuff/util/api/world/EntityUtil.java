@@ -5,6 +5,7 @@ import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
 
+import com.garume.Garuff.util.api.Wrapper;
 import com.google.gson.JsonParser;
 
 import net.minecraft.block.Block;

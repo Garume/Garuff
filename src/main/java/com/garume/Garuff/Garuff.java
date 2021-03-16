@@ -12,7 +12,6 @@ import com.garume.Garuff.module.ModuleManager;
 import com.garume.Garuff.module.setting.SettingManager;
 import com.garume.Garuff.proxy.CommonProxy;
 import com.garume.Garuff.rpc.Discord;
-import com.garume.Garuff.ui.Hud;
 import com.garume.Garuff.ui.TabGui;
 import com.garume.Garuff.ui.clickgui.ClickGui;
 import com.garume.Garuff.util.Refrence;
@@ -46,7 +45,6 @@ public class Garuff {
 	public static SettingManager settingManager;
 	public ClickGui clickGui;
 	public static TabGui tabGui;
-	public static Hud hud;
 	public static Cape cape;
 	public static SaveandLoad saveLoad;
 	public EventProces eventProcessor;

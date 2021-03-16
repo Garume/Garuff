@@ -69,6 +69,15 @@ public class EventProces {
 		}
 	}
 
+    @SubscribeEvent
+    public void onKey(InputUpdateEvent event){
+        try {
+            ModuleManager.onKey(event);
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 	@SubscribeEvent
 	public void onMouseInput(InputEvent.MouseInputEvent event) {
 		if(Mouse.getEventButtonState()) {
