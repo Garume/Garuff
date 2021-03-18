@@ -14,7 +14,10 @@ import com.garume.Garuff.module.modules.player.GuiMove;
 import com.garume.Garuff.module.modules.player.NoSlow;
 import com.garume.Garuff.module.modules.player.Sprint;
 import com.garume.Garuff.module.modules.pvp.NotAutoCrystal;
-import com.garume.Garuff.module.modules.render.HalfBright;
+import com.garume.Garuff.module.modules.render.Esp;
+import com.garume.Garuff.module.modules.render.Freecam;
+import com.garume.Garuff.module.modules.render.FullBright;
+import com.garume.Garuff.module.modules.render.NoRender;
 import com.garume.Garuff.ui.HudEditor;
 import com.garume.Garuff.ui.clickgui.ClickGuiModule;
 import com.garume.Garuff.ui.hud.ArrayListt;
@@ -46,7 +49,10 @@ public class ModuleManager {
 		//pvp
 		ModuleManager.modules.add(new NotAutoCrystal());
 		//render
-		ModuleManager.modules.add(new HalfBright());
+		ModuleManager.modules.add(new Freecam());
+		ModuleManager.modules.add(new Esp());
+		ModuleManager.modules.add(new FullBright());
+		ModuleManager.modules.add(new NoRender());
 		//hud
 		ModuleManager.modules.add(new HudEditor());
 		ModuleManager.modules.add(new ArrayListt());
@@ -62,6 +68,7 @@ public class ModuleManager {
 		Garuff.getInstance().clickGui.render();
 	}
 
+	@SuppressWarnings("static-access")
 	public static void onKey(InputUpdateEvent event){
         INSTANCE.modules.forEach( mod -> {
             if (mod.isToggled()) mod.onKey(event);

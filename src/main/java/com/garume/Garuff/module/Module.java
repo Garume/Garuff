@@ -13,7 +13,6 @@ import com.lukflug.panelstudio.settings.Toggleable;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.InputUpdateEvent;
-import net.minecraftforge.common.MinecraftForge;
 
 public class Module implements Toggleable{
 
@@ -96,12 +95,10 @@ public class Module implements Toggleable{
 
 	}
 
-	public void onEnable() {
-		MinecraftForge.EVENT_BUS.register(this);
+	protected void onEnable() {
 	}
 
-	public void onDisable() {
-		MinecraftForge.EVENT_BUS.unregister(this);
+	protected void onDisable() {
 	}
 
 	public void addSettings(Setting... settings) {

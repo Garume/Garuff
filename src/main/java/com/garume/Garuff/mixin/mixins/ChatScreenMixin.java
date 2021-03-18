@@ -9,18 +9,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.garume.Garuff.module.ModuleManager;
 
 import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 
 
 
 @Mixin(GuiChat.class)
-public class ChatScreenMixin extends GuiScreen
+public class ChatScreenMixin
 {
 	@Shadow
     protected GuiTextField chatField;
 
-	@Inject(at = {@At("TAIL")}, method = {"init()V"})
+    @Inject(at = @At("TAIL"), method = "initGui")
 	protected void onInit(CallbackInfo ci)
 	{
 		if(ModuleManager.isModuleEnabled("InfinityChat"))

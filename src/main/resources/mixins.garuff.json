@@ -30,5 +30,6 @@
 		"MixinPlayerControllerMP",
 		"MixinAbstractClientPlayer",
 		"accessor.AccessorEntityPlayerSP"
+		"ChatScreenMixin""
 	]
 }
