@@ -38,7 +38,7 @@ import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 
 @Mod(modid = Garuff.MOD_ID, version = Garuff.MOD_VERSION)
 public class Garuff {
-	public static final String MOD_ID = "garu";
+	public static final String MOD_ID = "garuff";
 	public static final String MOD_VERSION = "0.1";
 
 	public static ModuleManager moduleManager;

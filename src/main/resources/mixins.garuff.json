@@ -1,8 +1,8 @@
 {
-  "verbose": false,
+  "required": true,
   "compatibilityLevel": "JAVA_8",
   "package": "com.garume.Garuff.mixin.mixins",
-  "refmap": "mixins.machine.refmap.json",
+  "refmap": "mixins.garuff.refmap.json",
   "client": [
     "client.model.MixinModelBiped",
     "client.renderer.tileentity.MixinTileEntityChestRenderer"

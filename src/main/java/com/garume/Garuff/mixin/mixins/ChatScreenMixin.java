@@ -17,13 +17,13 @@ import net.minecraft.client.gui.GuiTextField;
 public class ChatScreenMixin
 {
 	@Shadow
-    protected GuiTextField chatField;
+    protected GuiTextField inputField;
 
     @Inject(at = @At("TAIL"), method = "initGui")
 	protected void onInit(CallbackInfo ci)
 	{
 		if(ModuleManager.isModuleEnabled("InfinityChat"))
 			System.out.print("working");
-			chatField.setMaxStringLength(Integer.MAX_VALUE);
+			inputField.setMaxStringLength(Integer.MAX_VALUE);
 	}
 }
