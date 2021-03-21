@@ -27,7 +27,7 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
-            property 'fml.coreMods.load', 'net.toshimichi.sushi.mixin.MixinLoaderForge'
+            property 'fml.coreMods.load', 'com.garume.Garuff.MixinLoader'
             property 'mixin.env.disableRefMap', 'true'
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
@@ -77,7 +77,7 @@ jar {
             'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
             'TweakOrder': 0,
             'FMLCorePluginContainsFMLMod': 'true',
-            'FMLCorePlugin': 'com.garume.Garuff.mixin.MixinLoaderForge',
+            'FMLCorePlugin': 'com.garume.Garuff.mixin.MixinLoader',
             'ForceLoadAsMod': 'true'
     )
 }
