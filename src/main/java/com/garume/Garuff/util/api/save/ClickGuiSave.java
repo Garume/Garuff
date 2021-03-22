@@ -24,7 +24,7 @@ public class ClickGuiSave {
         }
     }
 
-    public static final String fileName = "postman/";
+    public static final String fileName = "garuff/";
     String mainName = "clickGui/";
 
     public void clickGuiSave() throws IOException {

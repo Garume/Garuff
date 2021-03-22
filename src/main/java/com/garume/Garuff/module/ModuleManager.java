@@ -76,22 +76,22 @@ public class ModuleManager {
     }
 
 	public static void onWorldRender(RenderWorldLastEvent event) {
-		Minecraft.getMinecraft().mcProfiler.startSection("postman");
-		Minecraft.getMinecraft().mcProfiler.startSection("setup");
+		Minecraft.getMinecraft().profiler.startSection("postman");
+		Minecraft.getMinecraft().profiler.startSection("setup");
 		JTessellator.prepare();
 		RenderEvent e = new RenderEvent(event.getPartialTicks());
-		Minecraft.getMinecraft().mcProfiler.endSection();
+		Minecraft.getMinecraft().profiler.endSection();
 
 		modules.stream().filter(module -> module.isToggled()).forEach(module -> {
-			Minecraft.getMinecraft().mcProfiler.startSection(module.getName());
+			Minecraft.getMinecraft().profiler.startSection(module.getName());
 			module.onWorldRender(e);
-			Minecraft.getMinecraft().mcProfiler.endSection();
+			Minecraft.getMinecraft().profiler.endSection();
 		});
 
-		Minecraft.getMinecraft().mcProfiler.startSection("release");
+		Minecraft.getMinecraft().profiler.startSection("release");
 		JTessellator.release();
-		Minecraft.getMinecraft().mcProfiler.endSection();
-		Minecraft.getMinecraft().mcProfiler.endSection();
+		Minecraft.getMinecraft().profiler.endSection();
+		Minecraft.getMinecraft().profiler.endSection();
 	}
 
 	public Module getModule (String name){

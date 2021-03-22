@@ -6,8 +6,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.garume.Garuff.module.ModuleManager;
-
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiTextField;
 
@@ -22,8 +20,6 @@ public class ChatScreenMixin
     @Inject(at = @At("TAIL"), method = "initGui")
 	protected void onInit(CallbackInfo ci)
 	{
-		if(ModuleManager.isModuleEnabled("InfinityChat"))
-			System.out.print("working");
-			inputField.setMaxStringLength(Integer.MAX_VALUE);
+    	inputField.setMaxStringLength(Integer.MAX_VALUE);
 	}
 }

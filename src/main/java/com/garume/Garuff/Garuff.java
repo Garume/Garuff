@@ -144,7 +144,7 @@ public class Garuff {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		log.info("postman initialization finished.");
+		log.info("garuff initialization finished.");
 		// Start an async thread with loadCfg. I dunno why but, for some reasons, you cannot put this with
 		// The other, if you do, it will create problems with CustomFontRenderer
 		new Thread(this::loadCfg).start();

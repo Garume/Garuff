@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 import org.spongepowered.asm.launch.MixinBootstrap;
+import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.spongepowered.asm.mixin.Mixins;
 
 import com.garume.Garuff.Garuff;
@@ -15,7 +16,9 @@ public class MixinLoader implements IFMLLoadingPlugin {
 	public MixinLoader(){
 		Garuff.log.info("mixins initialized");
 		MixinBootstrap.init();
-		Mixins.addConfiguration("mixins.Garuff.json");
+		Mixins.addConfiguration("mixins.garuff.json");
+        MixinEnvironment.getDefaultEnvironment().setObfuscationContext("searge");
+        Garuff.log.info(MixinEnvironment.getDefaultEnvironment().getObfuscationContext());
 	}
 
 	@Override
@@ -43,4 +46,5 @@ public class MixinLoader implements IFMLLoadingPlugin {
 		return null;
 	}
 }
+
 

@@ -18,6 +18,8 @@ import com.garume.Garuff.module.setting.settings.ModeSetting;
 import com.garume.Garuff.module.setting.settings.NumberSetting;
 import com.garume.Garuff.util.Refrence;
 
+import net.minecraft.client.Minecraft;
+
 /*
  * Written by @SrgantMooMoo on 11/30/20 with inspiration taken from @SebSb.
  */
@@ -28,10 +30,9 @@ public class SaveandLoad {
 
 	private File dir;
 	private File dataFile;
-    private static final String CONFIG_PATH = "Garuff/config/";
 
 	public SaveandLoad() {
-		dir = new File(CONFIG_PATH, Refrence.MOD_STRING_NAME);
+		dir = new File(Minecraft.getMinecraft().gameDir, Refrence.MOD_STRING_NAME);
 		if(!dir.exists()) {
 			dir.mkdir();
 		}
