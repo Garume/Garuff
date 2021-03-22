@@ -27,6 +27,7 @@
 	"MixinAbstractClientPlayer",
 	"AccessorEntityPlayerSP",
 	"AccessorPlayerControllerMP",
-	"ChatScreenMixin"
+	"ChatScreenMixin",
+	"AccessorRenderManager"
 ]
 }

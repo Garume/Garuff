@@ -2,16 +2,18 @@ package com.garume.Garuff.util.api.world;
 
 import java.io.IOException;
 import java.net.URL;
+import java.lang.reflect.Field;
 
-import org.apache.commons.io.IOUtils;
-
+import com.garume.Garuff.mixin.mixins.AccessorRenderManager;
 import com.garume.Garuff.util.api.Wrapper;
 import com.google.gson.JsonParser;
+
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,12 +30,13 @@ import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.Timer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-
-
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import org.apache.commons.io.IOUtils;
 
 /**
  * @Author 086/KAMI
@@ -43,6 +46,27 @@ import net.minecraft.util.math.Vec3d;
 public class EntityUtil {
 
 	private static final Minecraft mc = Minecraft.getMinecraft();
+
+	public static double getRenderPosX(RenderManager renderManager) {
+		return ((AccessorRenderManager) renderManager).getRenderPosX();
+	}
+
+	public static double getRenderPosY(RenderManager renderManager) {
+		return ((AccessorRenderManager) renderManager).getRenderPosY();
+	}
+
+	public static double getRenderPosZ(RenderManager renderManager) {
+		return ((AccessorRenderManager) renderManager).getRenderPosZ();
+	}
+	private static final Field TIMER_FIELD;
+	private static final Field TICK_LENGTH_FIELD;
+
+	static {
+		TIMER_FIELD = ObfuscationReflectionHelper.findField(Minecraft.class, "timer");
+		TICK_LENGTH_FIELD = ObfuscationReflectionHelper.findField(Timer.class, "tickLength");
+		TIMER_FIELD.setAccessible(true);
+		TICK_LENGTH_FIELD.setAccessible(true);
+	}
 
 	public static boolean isPassive(Entity e) {
 		if (e instanceof EntityWolf && ((EntityWolf) e).isAngry()) return false;
@@ -128,39 +152,49 @@ public class EntityUtil {
 	}
 
 	public static boolean isOnLiquidOffset(double offset) {
-        final Minecraft mc = Minecraft.getMinecraft();
+		final Minecraft mc = Minecraft.getMinecraft();
 
-        if (mc.player.fallDistance >= 3.0f) {
-            return false;
-        }
+		if (mc.player.fallDistance >= 3.0f) {
+			return false;
+		}
 
-        if (mc.player != null) {
-            final AxisAlignedBB bb = mc.player.getRidingEntity() != null ? mc.player.getRidingEntity().getEntityBoundingBox().contract(0.0d, 0.0d, 0.0d).offset(0.0d, -offset, 0.0d) : mc.player.getEntityBoundingBox().contract(0.0d, 0.0d, 0.0d).offset(0.0d, -offset, 0.0d);
-            boolean onLiquid = false;
-            int y = (int) bb.minY;
-            for (int x = MathHelper.floor(bb.minX); x < MathHelper.floor(bb.maxX + 1.0D); x++) {
-                for (int z = MathHelper.floor(bb.minZ); z < MathHelper.floor(bb.maxZ + 1.0D); z++) {
-                    final Block block = mc.world.getBlockState(new BlockPos(x, y, z)).getBlock();
-                    if (block != Blocks.AIR) {
-                        if (!(block instanceof BlockLiquid)) {
-                            return false;
-                        }
-                        onLiquid = true;
-                    }
-                }
-            }
-            return onLiquid;
-        }
+		if (mc.player != null) {
+			final AxisAlignedBB bb = mc.player.getRidingEntity() != null ? mc.player.getRidingEntity().getEntityBoundingBox().contract(0.0d, 0.0d, 0.0d).offset(0.0d, -offset, 0.0d) : mc.player.getEntityBoundingBox().contract(0.0d, 0.0d, 0.0d).offset(0.0d, -offset, 0.0d);
+			boolean onLiquid = false;
+			int y = (int) bb.minY;
+			for (int x = MathHelper.floor(bb.minX); x < MathHelper.floor(bb.maxX + 1.0D); x++) {
+				for (int z = MathHelper.floor(bb.minZ); z < MathHelper.floor(bb.maxZ + 1.0D); z++) {
+					final Block block = mc.world.getBlockState(new BlockPos(x, y, z)).getBlock();
+					if (block != Blocks.AIR) {
+						if (!(block instanceof BlockLiquid)) {
+							return false;
+						}
+						onLiquid = true;
+					}
+				}
+			}
+			return onLiquid;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
 	public static void setTimer(float speed) {
-		Minecraft.getMinecraft().timer.tickLength = 50.0f / speed;
+		try {
+			Timer timer = (Timer) TIMER_FIELD.get(Minecraft.getMinecraft());
+			TICK_LENGTH_FIELD.set(timer, ((float)50 / speed));
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void resetTimer() {
-		Minecraft.getMinecraft().timer.tickLength = 50;
+		try {
+			Timer timer = (Timer) TIMER_FIELD.get(Minecraft.getMinecraft());
+			TICK_LENGTH_FIELD.set(timer, ((float)50));
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static Vec3d getInterpolatedAmount(Entity entity, Vec3d vec) {
@@ -239,7 +273,7 @@ public class EntityUtil {
 	}
 
 	public static Vec3d getInterpolatedRenderPos(Entity entity, float ticks) {
-		return getInterpolatedPos(entity, ticks).subtract(Wrapper.getMinecraft().getRenderManager().renderPosX, Wrapper.getMinecraft().getRenderManager().renderPosY, Wrapper.getMinecraft().getRenderManager().renderPosZ);
+		return getInterpolatedPos(entity, ticks).subtract(getRenderPosX(mc.getRenderManager()),getRenderPosY(mc.getRenderManager()),getRenderPosZ(mc.getRenderManager()));
 	}
 
 	public static boolean isMoving(EntityLivingBase entity) {
