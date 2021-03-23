@@ -1,33 +1,10 @@
 {
-"required": true,
-"compatibilityLevel": "JAVA_8",
-"package": "com.garume.Garuff.mixin.mixins",
-"refmap": "mixins.garuff.refmap.json",
-"mixins": [
-	"MixinBlockLiquid",
-	"MixinBlockSlimeBlock",
-	"MixinBlockSoulSand",
-	"MixinBlockWeb",
-	"MixinEntity",
-	"MixinEntityPlayer",
-	"MixinEntityPlayerSP",
-	"MixinEntityRenderer",
-	"MixinGuiMainMenu",
-	"MixinGuiPlayerTabOverlay",
-	"MixinGuiScreen",
-	"MixinItemRenderer",
-	"MixinMovementInputFromOptions",
-	"MixinNetworkManager",
-	"MixinGuiIngame",
-	"MixinRender",
-	"MixinRenderLivingBase",
-	"MixinWorld",
-	"MixinMinecraft",
-	"MixinPlayerControllerMP",
-	"MixinAbstractClientPlayer",
-	"AccessorEntityPlayerSP",
-	"AccessorPlayerControllerMP",
-	"ChatScreenMixin",
-	"AccessorRenderManager"
-]
+  "required": true,
+  "compatibilityLevel": "JAVA_8",
+  "package":"com.garume.Garuff.mixin.mixins",
+  "refmap": "mixins.garuff.refmap.json",
+  "mixins": [
+    "AccessorRenderManager",
+    "MixinEntityPlayerSP"
+  ]
 }

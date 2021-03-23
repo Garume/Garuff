@@ -1,16 +1,14 @@
 package com.garume.Garuff.mixin.mixins;
 
-import net.minecraft.client.renderer.entity.RenderManager;
+import com.garume.Garuff.module.ModuleManager;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.MoverType;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import com.garume.Garuff.module.ModuleManager;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.MoverType;
 
 @Mixin(Entity.class)
 public abstract class MixinEntity {
@@ -24,7 +22,7 @@ public abstract class MixinEntity {
 			entity.isAirBorne = true;
 		}
 	}
-
+	
 	  @Shadow public abstract boolean equals(Object p_equals_1_);
 
 	    @Shadow

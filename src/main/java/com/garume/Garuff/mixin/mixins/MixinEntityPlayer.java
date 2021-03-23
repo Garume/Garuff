@@ -1,5 +1,10 @@
 package com.garume.Garuff.mixin.mixins;
 
+import com.garume.Garuff.Garuff;
+import com.garume.Garuff.event.events.PlayerJumpEvent;
+import com.garume.Garuff.event.events.WaterPushEvent;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -7,12 +12,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.garume.Garuff.Garuff;
-import com.garume.Garuff.event.events.PlayerJumpEvent;
-import com.garume.Garuff.event.events.WaterPushEvent;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 
 @Mixin(EntityPlayer.class)
 public abstract class MixinEntityPlayer {

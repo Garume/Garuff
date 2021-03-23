@@ -36,7 +36,7 @@ public class ClickGuiModule extends Module {
 
 	public BooleanSetting thinGui = new BooleanSetting("thinGui", this, false);
 
-	private final ResourceLocation watermark = new ResourceLocation(Garuff.MOD_ID, "textures/watermark.png");
+	private final ResourceLocation watermark = new ResourceLocation("garuff", "textures/watermark.png");
 
 	public ClickGuiModule() {
 		super("clickGuiModule", "classic hud", Keyboard.KEY_RSHIFT, Category.CLIENT);

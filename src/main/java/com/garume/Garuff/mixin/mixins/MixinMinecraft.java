@@ -22,22 +22,22 @@ public class MixinMinecraft {
 	private boolean isHittingBlock = false;
 
 
-    // Hacky but safer than using @Redirect
+	// Hacky but safer than using @Redirect
 	// From Kami blue
-    @Inject(method = "rightClickMouse", at = @At("HEAD"))
-    public void rightClickMousePre(CallbackInfo ci) {
-        if (ModuleManager.isModuleEnabled("multitask")) {
-            isHittingBlock = playerController.getIsHittingBlock();
-            ((AccessorPlayerControllerMP) playerController).kbSetIsHittingBlock(false);
-        }
-    }
+	@Inject(method = "rightClickMouse", at = @At("HEAD"))
+	public void rightClickMousePre(CallbackInfo ci) {
+		if (ModuleManager.isModuleEnabled("multitask")) {
+			isHittingBlock = playerController.getIsHittingBlock();
+			((AccessorPlayerControllerMP) playerController).kbSetIsHittingBlock(false);
+		}
+	}
 
-    @Inject(method = "rightClickMouse", at = @At("RETURN"))
-    public void rightClickMousePost(CallbackInfo ci) {
-        if (ModuleManager.isModuleEnabled("multitask") && !playerController.getIsHittingBlock()) {
-            ((AccessorPlayerControllerMP) playerController).kbSetIsHittingBlock(isHittingBlock);
-        }
-    }
+	@Inject(method = "rightClickMouse", at = @At("RETURN"))
+	public void rightClickMousePost(CallbackInfo ci) {
+		if (ModuleManager.isModuleEnabled("multitask") && !playerController.getIsHittingBlock()) {
+			((AccessorPlayerControllerMP) playerController).kbSetIsHittingBlock(isHittingBlock);
+		}
+	}
 
 	@Inject(method = "sendClickBlockToController", at = @At("HEAD"))
 	public void sendClickBlockToControllerPre(boolean leftClick, CallbackInfo ci) {

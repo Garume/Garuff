@@ -1,12 +1,12 @@
 package com.garume.Garuff.mixin.mixins;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import com.garume.Garuff.Garuff;
 import com.garume.Garuff.event.events.TransformSideFirstPersonEvent;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.At;
+
 
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.util.EnumHandSide;
