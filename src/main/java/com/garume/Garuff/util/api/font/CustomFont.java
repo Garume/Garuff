@@ -8,6 +8,7 @@ import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
+import net.minecraft.client.renderer.texture.AbstractTexture;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.renderer.texture.DynamicTexture;

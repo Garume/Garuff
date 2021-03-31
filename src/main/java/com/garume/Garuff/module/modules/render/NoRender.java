@@ -26,7 +26,7 @@ public class NoRender extends Module {
 	public BooleanSetting portalEffect = new BooleanSetting("portalEffect", this, false);
 
 	public NoRender() {
-		super("noRender", "stops certain events from rendering.", Keyboard.KEY_NONE, Category.RENDER);
+		super("NoRender", "stops certain events from rendering.", Keyboard.KEY_NONE, Category.RENDER);
 		this.addSettings(rain, hurtCam, potionEffects, fire, portalEffect);
 	}
 

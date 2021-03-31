@@ -13,10 +13,10 @@ import com.garume.Garuff.util.api.font.CustomFontRenderer;
 
 
 public class ClientFont extends Module {
-	public ModeSetting font = new ModeSetting("font", this, "Comic Sans Ms", "Comic Sans Ms", "Arial", "Verdana");
+	public ModeSetting font = new ModeSetting("font", this, "Arial", "Comic Sans Ms", "Arial", "Verdana");
 
 	public ClientFont() {
-		super ("clientFont", "u have to re enable for it to change :(", Keyboard.KEY_NONE, Category.CLIENT);
+		super ("ClientFont", "u have to re enable for it to change :(", Keyboard.KEY_NONE, Category.CLIENT);
 		this.addSettings(font);
 	}
 

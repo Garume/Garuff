@@ -30,7 +30,7 @@ public class ClickGuiModule extends Module {
 	public ColorSetting enabledColor = new ColorSetting("enabledColor", this, new JColor(121, 193, 255, 255)); //(0, 157, 255, 255));
 	public ColorSetting backgroundColor = new ColorSetting("bgColor", this, new JColor(0, 0, 0, 255)); //(0, 121, 194, 255));
 	public ColorSetting settingBackgroundColor = new ColorSetting("settinBgColor", this, new JColor(0, 0, 0, 255));
-	public ColorSetting outlineColor = new ColorSetting("settingsHighlight", this, new JColor(255, 255, 255, 255));
+	public ColorSetting outlineColor = new ColorSetting("settingsHighlight", this, new JColor(255, 255, 255, 150));
 	public ColorSetting fontColor = new ColorSetting("categoryColor", this, new JColor(255, 255, 255, 255));
 	public NumberSetting opacity = new NumberSetting("opacity", this, 255, 0, 255, 5);
 
@@ -39,7 +39,7 @@ public class ClickGuiModule extends Module {
 	private final ResourceLocation watermark = new ResourceLocation("garuff", "textures/watermark.png");
 
 	public ClickGuiModule() {
-		super("clickGuiModule", "classic hud", Keyboard.KEY_RSHIFT, Category.CLIENT);
+		super("ClickGuiModule", "classic hud", Keyboard.KEY_RSHIFT, Category.CLIENT);
 		this.addSettings(scrollMode,scrolls,description,animationSpeed,opacity,fontColor,enabledColor,backgroundColor,settingBackgroundColor,outlineColor);
 		INSTANCE = this;
 	}
@@ -47,7 +47,7 @@ public class ClickGuiModule extends Module {
 	@SubscribeEvent
     public void renderOverlay(RenderGameOverlayEvent event) {
 		ScaledResolution sr = new ScaledResolution(mc);
-		if(event.getType() == RenderGameOverlayEvent.ElementType.BOSSHEALTH) {
+		if (event.getType() == RenderGameOverlayEvent.ElementType.BOSSHEALTH) {
 			mc.renderEngine.bindTexture(watermark);
 			Gui.drawScaledCustomSizeModalRect(sr.getScaledWidth() - 200, sr.getScaledHeight() - 200, 0, 0, 100, 100, 200, 200, 100, 100);
 		}
@@ -61,6 +61,7 @@ public class ClickGuiModule extends Module {
 		super.onEnable();
 		MinecraftForge.EVENT_BUS.register(this);
 		Garuff.getInstance().clickGui.enterGUI();
+
 	}
 
 	public void onUpdate() {

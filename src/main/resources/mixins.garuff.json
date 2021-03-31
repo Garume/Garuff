@@ -5,6 +5,7 @@
   "refmap": "mixins.garuff.refmap.json",
   "mixins": [
     "AccessorRenderManager",
-    "MixinEntityPlayerSP"
+    "MixinEntityPlayerSP",
+    "ChatScreenMixin"
   ]
 }

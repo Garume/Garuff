@@ -35,6 +35,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
+import org.lwjgl.opengl.Display;
 
 @Mod(modid = Garuff.MOD_ID, version = Garuff.MOD_VERSION)
 public class Garuff {
@@ -84,16 +85,6 @@ public class Garuff {
 		}
 	}
 
-	public void fontInit() {
-
-		customFontRenderer = new CustomFontRenderer(new Font("Comic Sans MS", Font.PLAIN, 18), false,false);
-		printLog("custom font initialized.");
-	}
-
-	private void loadCfg() {
-		saveLoad = new SaveandLoad();
-		printLog("configs initialized.");
-	}
 
 	public void extClientInit() {
 
@@ -103,6 +94,9 @@ public class Garuff {
 
 		MinecraftForge.EVENT_BUS.register(this);
 		printLog("forge event system initialized.");
+
+		customFontRenderer = new CustomFontRenderer(new Font("Arial", Font.PLAIN, 18), false,false);
+		printLog("custom font initialized.");
 
 		settingManager = new SettingManager();
 		printLog("settings system initialized.");
@@ -124,6 +118,9 @@ public class Garuff {
 		Discord.startRPC();
 		printLog("DiscordRPC runched.");
 
+		saveLoad = new SaveandLoad();
+		printLog("configs initialized.");
+
 		clickGuiSave = new ClickGuiSave();
 		clickGuiLoad = new ClickGuiLoad();
 		Runtime.getRuntime().addShutdownHook(new ConfigStopper());
@@ -131,24 +128,13 @@ public class Garuff {
 	}
 
 	@EventHandler
-	public void init (FMLInitializationEvent event) {
-		// Create a thread with extClientInit
-		Thread t = new Thread(this::extClientInit);
-		// Start it
-		t.start();
-		// Run opengl
-		fontInit();
-		try {
-			// Wait for extClientInit to finish
-			t.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		log.info("garuff initialization finished.");
-		// Start an async thread with loadCfg. I dunno why but, for some reasons, you cannot put this with
-		// The other, if you do, it will create problems with CustomFontRenderer
-		new Thread(this::loadCfg).start();
+	public void init(FMLInitializationEvent event) {
+		Display.setTitle(Garuff.MOD_ID + " " + Garuff.MOD_VERSION);
 
+		Garuff.log.info("Starting up " + Garuff.MOD_ID + " " + Garuff.MOD_VERSION + "!");
+		extClientInit();
+		Garuff.log.info("Finished initialization for " + Garuff.MOD_ID + " " + Garuff.MOD_VERSION + "!");
+		Garuff.log.info("garuff initialization finished.");
 	}
 
 	@EventHandler

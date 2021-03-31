@@ -18,7 +18,7 @@ import net.minecraftforge.client.event.InputUpdateEvent;
 	public BooleanSetting slimeBlock = new BooleanSetting("slimeBlock", this, true);
 
 	public NoSlow() {
-		super ("noSlow", "slow? no.", Keyboard.KEY_NONE, Category.PLAYER);
+		super ("NoSlow", "slow? no.", Keyboard.KEY_NONE, Category.PLAYER);
 		this.addSettings(food, web, soulSand, slimeBlock);
 	}
 

@@ -47,7 +47,7 @@ public class SettingManager {
 			}
 			}
 		}
-		System.err.println("[postman] Error Setting NOT found: '" + name +"'!");
+		System.err.println("[Garuff] Error Setting NOT found: '" + name +"'!");
 		return null;
 	}
 }

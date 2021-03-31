@@ -13,7 +13,7 @@ import net.minecraftforge.client.event.InputUpdateEvent;
 public class GuiMove extends Module {
 
 	public GuiMove() {
-		super ("inventoryMove", "lets you move while in ur a gui screen.", Keyboard.KEY_NONE, Category.PLAYER);
+		super ("GuiMove", "lets you move while in ur a gui screen.", Keyboard.KEY_NONE, Category.PLAYER);
 		this.addSettings(pitchSpeed,yawSpeed,chat,sneak);
 	}
 

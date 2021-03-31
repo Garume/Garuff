@@ -69,7 +69,7 @@ public class ClickGui extends MinecraftHUDGUI {
 			@Override
 			public void drawString(Point pos, String s, Color c) {
 				GLInterface.end();
-				int x=pos.x+2, y=pos.y+1;
+				int x=pos.x+20, y=pos.y+1;
 				if(ModuleManager.getModuleByName("clientFont").isToggled())FontUtils.drawStringWithShadow(true,s,x,y,new JColor(c));
 				else FontUtils.drawStringWithShadow(false,s,x,y,new JColor(c));
 				GLInterface.begin();
@@ -89,7 +89,7 @@ public class ClickGui extends MinecraftHUDGUI {
 
 			@Override
 			protected String getResourcePrefix() {
-				return "pst/textures/";
+				return "garuff/textures/";
 			}
 		};
 		gui = new HUDClickGUI(guiInterface,ClickGuiModule.INSTANCE.description.is("mouse") ? new MouseDescription(new Point(5,0)) : new FixedDescription(new Point(0,0))) {

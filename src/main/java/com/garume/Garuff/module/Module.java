@@ -82,6 +82,9 @@ public class Module implements Toggleable{
 		}else {
 			this.onDisable();
 		}
+		if(Garuff.saveLoad != null) {
+			Garuff.saveLoad.save();
+		}
 	}
 
 	public void toggle() {
@@ -92,7 +95,9 @@ public class Module implements Toggleable{
 		}else {
 			this.onDisable();
 		}
-
+		if(Garuff.saveLoad != null) {
+			Garuff.saveLoad.save();
+		}
 	}
 
 	protected void onEnable() {
