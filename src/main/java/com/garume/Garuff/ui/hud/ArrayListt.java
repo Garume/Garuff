@@ -14,6 +14,7 @@ import com.garume.Garuff.module.ModuleManager;
 import com.garume.Garuff.module.setting.settings.BooleanSetting;
 import com.garume.Garuff.module.setting.settings.ColorSetting;
 import com.garume.Garuff.module.setting.settings.ModeSetting;
+import com.garume.Garuff.module.setting.settings.NumberSetting;
 import com.garume.Garuff.util.api.render.JColor;
 import com.lukflug.panelstudio.hud.HUDList;
 import com.lukflug.panelstudio.hud.ListComponent;
@@ -24,6 +25,7 @@ public class ArrayListt extends HudModule {
 	private ModuleArrayList list=new ModuleArrayList();
 
 	public ColorSetting color = new ColorSetting("color", this, new JColor(255, 255, 255, 255));
+	public NumberSetting size = new NumberSetting("Size",this,  2, 1, 10 , 1);
 	public ModeSetting sortHeight = new ModeSetting("sortHeight", this, "betic", "betic", "up", "down");
 	public ModeSetting sortLength = new ModeSetting("sortLength", this, "left", "left", "right");
 	public BooleanSetting forgeHax = new BooleanSetting("forgeHax", this, true);

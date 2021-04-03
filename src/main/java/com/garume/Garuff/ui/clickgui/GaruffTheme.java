@@ -1,14 +1,9 @@
 package com.garume.Garuff.ui.clickgui;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Rectangle;
-
-import com.garume.Garuff.Garuff;
 import com.lukflug.panelstudio.Context;
 import com.lukflug.panelstudio.theme.*;
-import scala.Int;
+
+import java.awt.*;
 
 /**
  * Recreates the appearance of GameSense 2.2.0.
@@ -90,10 +85,8 @@ public class GaruffTheme implements Theme {
 				Color Rcolor = getRColor(color);
 				context.getInterface().fillRect(new Rectangle(new Point(context.getPos().x, context.getPos().y + context.getSize().height - 1), new Dimension(context.getSize().width, 1)), Rcolor, Rcolor, Rcolor, Rcolor);
 				context.getInterface().fillRect(new Rectangle(new Point(context.getPos().x, context.getPos().y + getHeight(open) - 1), new Dimension(context.getSize().width, 1)), Rcolor, Rcolor,Rcolor, Rcolor);
-			if (level == 1 && open){
-			//	Color Rcolor = getRColor(color);
-			//	context.getInterface().fillRect(new Rectangle(new Point(context.getPos().x+context.getSize().width - 90,14 + context.getPos().y),new Dimension(1,context.getSize().height - 15)),Rcolor,Rcolor,Rcolor,Rcolor);
-			//	context.getInterface().fillRect(new Rectangle(new Point(context.getPos().x+context.getSize().width - 1,14 + context.getPos().y),new Dimension(1,context.getSize().height - 15)),Rcolor,Rcolor,Rcolor,Rcolor);
+				context.getInterface().fillRect(new Rectangle(new Point(context.getPos().x+context.getSize().width - 90,14 + context.getPos().y),new Dimension(1,context.getSize().height - 15)),Rcolor,Rcolor,Rcolor,Rcolor);
+				context.getInterface().fillRect(new Rectangle(new Point(context.getPos().x+context.getSize().width - 1,14 + context.getPos().y),new Dimension(1,context.getSize().height - 15)),Rcolor,Rcolor,Rcolor,Rcolor);
 				}
 			}
 		}
