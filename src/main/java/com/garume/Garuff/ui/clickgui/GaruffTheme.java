@@ -79,15 +79,15 @@ public class GaruffTheme implements Theme {
 			if (level == 0) {
 				context.getInterface().fillRect(new Rectangle(context.getPos(), new Dimension(context.getSize().width, 1)), color, color, color, color);
 				context.getInterface().fillRect(new Rectangle(context.getPos(), new Dimension(1, context.getSize().height)), color, color, color, color);
-				context.getInterface().fillRect(new Rectangle(new Point(context.getPos().x + context.getSize().width - 1, context.getPos().y), new Dimension(1, context.getSize().height)), color, color, color, color);
+				context.getInterface().fillRect(new Rectangle(new Point(context.getPos().x + context.getSize().width - 1, context.getPos().y ), new Dimension(1, context.getSize().height + 1)), color, color, color, color);
 			}
 			if (level == 0 || open) {
 				Color Rcolor = getRColor(color);
-				context.getInterface().fillRect(new Rectangle(new Point(context.getPos().x, context.getPos().y + context.getSize().height - 1), new Dimension(context.getSize().width, 1)), Rcolor, Rcolor, Rcolor, Rcolor);
+				context.getInterface().fillRect(new Rectangle(new Point(context.getPos().x, context.getPos().y + context.getSize().height - 1), new Dimension(context.getSize().width, 1)), color, color, color, color);
 				context.getInterface().fillRect(new Rectangle(new Point(context.getPos().x, context.getPos().y + getHeight(open) - 1), new Dimension(context.getSize().width, 1)), Rcolor, Rcolor,Rcolor, Rcolor);
 				context.getInterface().fillRect(new Rectangle(new Point(context.getPos().x+context.getSize().width - 90,14 + context.getPos().y),new Dimension(1,context.getSize().height - 15)),Rcolor,Rcolor,Rcolor,Rcolor);
-				context.getInterface().fillRect(new Rectangle(new Point(context.getPos().x+context.getSize().width - 1,14 + context.getPos().y),new Dimension(1,context.getSize().height - 15)),Rcolor,Rcolor,Rcolor,Rcolor);
-				}
+			//	context.getInterface().fillRect(new Rectangle(new Point(context.getPos().x+context.getSize().width - 1,14 + context.getPos().y),new Dimension(1,context.getSize().height - 15)),Rcolor,Rcolor,Rcolor,Rcolor);
+
 			}
 		}
 
