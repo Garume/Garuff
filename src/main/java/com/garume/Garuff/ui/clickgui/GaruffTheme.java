@@ -48,7 +48,31 @@ public class GaruffTheme implements Theme {
 			this.level = level;
 			this.border = border;
 		}
+		@Override
+		public void renderTitle(Context context, String text, boolean focus, boolean active, boolean open) {
+			super.renderTitle(context, text, focus, active, open);
+			if (level != 0) {
+				Color color = getFontColor(active);
+				Point p1, p2, p3;
+				if (open) {
+					p3 = new Point(context.getPos().x + context.getSize().width - 3, context.getPos().y + context.getSize().height / 4);
+					p2 = new Point(context.getPos().x + context.getSize().width - context.getSize().height / 2, context.getPos().y + context.getSize().height * 3 / 4);
+					p1 = new Point(context.getPos().x + context.getSize().width - context.getSize().height + 3, context.getPos().y + context.getSize().height / 4);
+				} else {
+					p3 = new Point(context.getPos().x + context.getSize().width - 3, context.getPos().y + context.getSize().height / 4);
+					p2 = new Point(context.getPos().x + context.getSize().width - context.getSize().height / 2, context.getPos().y + context.getSize().height * 3 / 4);
+					p1 = new Point(context.getPos().x + context.getSize().width - context.getSize().height + 3, context.getPos().y + context.getSize().height / 4);
+				}
+				context.getInterface().drawLine(p1, p2, color, color);
+				context.getInterface().drawLine(p2, p3, color, color);
+			}
+			if (level == 0 && open){
+				Color color = getFontColor(focus);
+				context.getInterface().fillRect(new Rectangle(context.getRect().x,context.getRect().y+context.getRect().height-1,context.getRect().width,1),color,color,color,color);
 
+			}
+
+		}
 		@Override
 		public void renderRect(Context context, String text, boolean focus, boolean active, Rectangle rectangle, boolean overlay) {
 			Color color = getMainColor(focus, active);
@@ -64,7 +88,9 @@ public class GaruffTheme implements Theme {
 			}
 			Point stringPos = new Point(rectangle.getLocation());
 			stringPos.translate(0, border);
-			context.getInterface().drawString(stringPos, text, getFontColor(focus));
+			if (level==0) stringPos=new Point(rectangle.x+rectangle.width/2-context.getInterface().getFontWidth(text)/2,rectangle.y+getOffset()+2);
+			if (level==2 && overlay) context.getInterface().drawString(stringPos,"> "+text,getFontColor(focus));
+			else context.getInterface().drawString(stringPos,text,getFontColor(focus));
 		}
 
 		@Override
