@@ -40,7 +40,7 @@ import org.lwjgl.opengl.Display;
 @Mod(modid = Garuff.MOD_ID, version = Garuff.MOD_VERSION)
 public class Garuff {
 	public static final String MOD_ID = "garuff";
-	public static final String MOD_VERSION = "0.1";
+	public static final String MOD_VERSION = "0.21";
 
 	public static ModuleManager moduleManager;
 	public static SettingManager settingManager;
