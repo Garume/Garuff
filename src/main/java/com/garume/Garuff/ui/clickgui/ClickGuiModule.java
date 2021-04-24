@@ -1,6 +1,5 @@
 package com.garume.Garuff.ui.clickgui;
 
-import com.garume.Garuff.util.api.Wrapper;
 import org.lwjgl.input.Keyboard;
 
 import com.garume.Garuff.Garuff;
@@ -35,20 +34,18 @@ public class ClickGuiModule extends Module {
 	public ColorSetting fontColor = new ColorSetting("categoryColor", this, new JColor(255, 255, 255, 255));
 	public NumberSetting opacity = new NumberSetting("opacity", this, 255, 0, 255, 5);
 
-	public ModeSetting backgroundParticle = new ModeSetting("Particle", this, "Blur", "Blur", "None");
-
 	public BooleanSetting thinGui = new BooleanSetting("thinGui", this, false);
 
 	private final ResourceLocation watermark = new ResourceLocation("garuff", "textures/watermark.png");
 
 	public ClickGuiModule() {
 		super("ClickGuiModule", "classic hud", Keyboard.KEY_RSHIFT, Category.CLIENT);
-		this.addSettings(scrollMode, scrolls, description, animationSpeed, opacity, fontColor, enabledColor, backgroundColor, settingBackgroundColor, outlineColor, backgroundParticle);
+		this.addSettings(scrollMode,scrolls,description,animationSpeed,opacity,fontColor,enabledColor,backgroundColor,settingBackgroundColor,outlineColor);
 		INSTANCE = this;
 	}
 
 	@SubscribeEvent
-	public void renderOverlay(RenderGameOverlayEvent event) {
+    public void renderOverlay(RenderGameOverlayEvent event) {
 		ScaledResolution sr = new ScaledResolution(mc);
 		if (event.getType() == RenderGameOverlayEvent.ElementType.BOSSHEALTH) {
 			mc.renderEngine.bindTexture(watermark);
@@ -64,28 +61,21 @@ public class ClickGuiModule extends Module {
 		super.onEnable();
 		MinecraftForge.EVENT_BUS.register(this);
 		Garuff.getInstance().clickGui.enterGUI();
-		if (backgroundParticle.is("Blur")) {
-			if (Wrapper.getMinecraft().entityRenderer.getShaderGroup() != null) {
-				Wrapper.getMinecraft().entityRenderer.getShaderGroup().deleteShaderGroup();
-			}
-			Wrapper.getMinecraft().entityRenderer.loadShader(new ResourceLocation("shaders/post/blur.json"));
-		}
+
 	}
 
 	public void onUpdate() {
-		if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
 			this.setToggled(!toggled);
 		}
-		if (ModuleManager.getModuleByName("hudEditor").isToggled()) {
+		if(ModuleManager.getModuleByName("hudEditor").isToggled()) {
 			this.setToggled(!toggled);
 		}
+
 	}
 
 	public void onDisable() {
 		super.onDisable();
 		MinecraftForge.EVENT_BUS.unregister(this);
-		if(Wrapper.getMinecraft().entityRenderer.getShaderGroup() != null) {
-			Wrapper.getMinecraft().entityRenderer.getShaderGroup().deleteShaderGroup();
-		}
 	}
 }

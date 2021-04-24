@@ -24,7 +24,7 @@ public class Discord {
         discordRichPresence.largeImageText = "Garuff Client";
         discordRichPresence.smallImageKey = "garufflogo";
         discordRichPresence.smallImageText = "Small Garuff";
-        discordRichPresence.state = "Developing now!! by garume";
+        discordRichPresence.state = "by garume";
         discordRPC.Discord_UpdatePresence(discordRichPresence);
     }
 

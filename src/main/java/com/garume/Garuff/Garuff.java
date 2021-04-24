@@ -129,7 +129,7 @@ public class Garuff {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		Display.setTitle("Garuff " + Garuff.MOD_VERSION);
+		Display.setTitle(Garuff.MOD_ID + " " + Garuff.MOD_VERSION);
 
 		Garuff.log.info("Starting up " + Garuff.MOD_ID + " " + Garuff.MOD_VERSION + "!");
 		extClientInit();
