@@ -1,7 +1,7 @@
 package com.garume.Garuff.module;
 
 public enum Category {
-	PVP("PvP"), EXPLOITS("Exploits"),RENDER("Render"),PLAYER("Player"),CLIENT("Client"),HUD("Hud");
+	PVP("PvP"), EXPLOITS("Exploits"),RENDER("Render"),PLAYER("Player"),CLIENT("Client"),GAME("Game"),HUD("Hud");
 
 	public String name;
 	public int moduleIndex;
