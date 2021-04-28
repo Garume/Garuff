@@ -10,6 +10,7 @@ import com.garume.Garuff.module.modules.client.ClientFont;
 import com.garume.Garuff.module.modules.exploits.EzDupe;
 import com.garume.Garuff.module.modules.exploits.InfinityChat;
 import com.garume.Garuff.module.modules.exploits.RPC;
+import com.garume.Garuff.module.modules.games.Snake;
 import com.garume.Garuff.module.modules.player.GuiMove;
 import com.garume.Garuff.module.modules.player.NoSlow;
 import com.garume.Garuff.module.modules.player.Sprint;
@@ -21,6 +22,7 @@ import com.garume.Garuff.module.modules.render.NoRender;
 import com.garume.Garuff.ui.HudEditor;
 import com.garume.Garuff.ui.clickgui.ClickGuiModule;
 import com.garume.Garuff.ui.hud.ArrayListt;
+import com.garume.Garuff.ui.hud.PlayerModel;
 import com.garume.Garuff.util.api.render.JTessellator;
 
 import net.minecraft.client.Minecraft;
@@ -53,9 +55,12 @@ public class ModuleManager {
 		ModuleManager.modules.add(new Esp());
 		ModuleManager.modules.add(new FullBright());
 		ModuleManager.modules.add(new NoRender());
+		//game
+		ModuleManager.modules.add(new Snake());
 		//hud
 		ModuleManager.modules.add(new HudEditor());
 		ModuleManager.modules.add(new ArrayListt());
+		ModuleManager.modules.add(new PlayerModel());
         INSTANCE = this;
 
 	}

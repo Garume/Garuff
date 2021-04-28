@@ -12,6 +12,8 @@ import com.garume.Garuff.module.setting.settings.KeybindSetting;
 import com.lukflug.panelstudio.settings.Toggleable;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.InputUpdateEvent;
 
 public class Module implements Toggleable{
@@ -53,6 +55,9 @@ public class Module implements Toggleable{
 
 	public String getDescription() {
 		return description;
+	}
+	public static BlockPos getPlayerPos() {
+		return new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ);
 	}
 
 	public void setDescription(String description) {
@@ -123,5 +128,9 @@ public class Module implements Toggleable{
 		return toggled;
 	}
 
+	public void onGuiDrawScreen(int mouseX, int mouseY, float particleTicks){}
 
+	public void onGuiClick(int x,int y, int button){}
+
+	public void onGuiKeyPress(GuiScreenEvent.KeyboardInputEvent.Post e){}
 }
