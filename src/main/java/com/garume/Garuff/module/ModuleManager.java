@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.garume.Garuff.Garuff;
-import com.garume.Garuff.event.events.RenderEvent;
+import com.garume.Garuff.event.events.event.RenderEvent;
 import com.garume.Garuff.module.modules.client.ClientFont;
 import com.garume.Garuff.module.modules.exploits.EzDupe;
 import com.garume.Garuff.module.modules.exploits.InfinityChat;
@@ -14,6 +14,7 @@ import com.garume.Garuff.module.modules.games.Snake;
 import com.garume.Garuff.module.modules.player.GuiMove;
 import com.garume.Garuff.module.modules.player.NoSlow;
 import com.garume.Garuff.module.modules.player.Sprint;
+import com.garume.Garuff.module.modules.player.Timer;
 import com.garume.Garuff.module.modules.pvp.NotAutoCrystal;
 import com.garume.Garuff.module.modules.render.Esp;
 import com.garume.Garuff.module.modules.render.Freecam;
@@ -44,6 +45,7 @@ public class ModuleManager {
 		ModuleManager.modules.add(new Sprint());
 		ModuleManager.modules.add(new NoSlow());
 		ModuleManager.modules.add(new GuiMove());
+		ModuleManager.modules.add(new Timer());
 		//exploit
 		ModuleManager.modules.add(new EzDupe());
 		ModuleManager.modules.add(new RPC());

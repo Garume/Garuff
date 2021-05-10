@@ -1,7 +1,7 @@
 package com.garume.Garuff.mixin.mixins;
 
 import com.garume.Garuff.Garuff;
-import com.garume.Garuff.event.events.PlayerUpdateMoveStateEvent;
+import com.garume.Garuff.event.events.event.PlayerUpdateMoveStateEvent;
 import com.garume.Garuff.module.ModuleManager;
 import com.garume.Garuff.module.modules.player.GuiMove;
 import net.minecraft.client.Minecraft;

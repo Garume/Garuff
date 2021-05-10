@@ -1,7 +1,20 @@
 package com.garume.Garuff;
 
-import java.awt.Font;
 
+import java.awt.Font;
+import java.io.File;
+
+import com.garume.Garuff.command.Commands;
+import com.garume.Garuff.command.client.HelpCommand;
+import com.garume.Garuff.command.client.PrefixCommand;
+import com.garume.Garuff.command.client.ToggleCommand;
+import com.garume.Garuff.event.events.command.CommandCallHandler;
+import com.garume.Garuff.ui.command.CommandHandler;
+import com.garume.Garuff.util.api.save.*;
+import com.garume.Garuff.util.proxy.CommonProxy;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
@@ -10,17 +23,12 @@ import com.garume.Garuff.event.EventProces;
 import com.garume.Garuff.module.Module;
 import com.garume.Garuff.module.ModuleManager;
 import com.garume.Garuff.module.setting.SettingManager;
-import com.garume.Garuff.proxy.CommonProxy;
 import com.garume.Garuff.rpc.Discord;
 import com.garume.Garuff.ui.TabGui;
 import com.garume.Garuff.ui.clickgui.ClickGui;
 import com.garume.Garuff.util.Refrence;
 import com.garume.Garuff.util.api.font.CustomFontRenderer;
 import com.garume.Garuff.util.api.render.Cape;
-import com.garume.Garuff.util.api.save.ClickGuiLoad;
-import com.garume.Garuff.util.api.save.ClickGuiSave;
-import com.garume.Garuff.util.api.save.ConfigStopper;
-import com.garume.Garuff.util.api.save.SaveandLoad;
 
 import me.zero.alpine.EventBus;
 import me.zero.alpine.EventManager;
@@ -37,6 +45,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 import org.lwjgl.opengl.Display;
 
+
 @Mod(modid = Garuff.MOD_ID, version = Garuff.MOD_VERSION)
 public class Garuff {
 	public static final String MOD_ID = "garuff";
@@ -52,7 +61,15 @@ public class Garuff {
 	public CustomFontRenderer customFontRenderer;
 	public ClickGuiSave clickGuiSave;
 	public ClickGuiLoad clickGuiLoad;
+	public CommandHandler command;
 
+	private static final Gson gson;
+
+	static {
+		gson = new GsonBuilder().setPrettyPrinting().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+	}
+
+	public ModConfig modConfig;
 
 	public static final Logger log = LogManager.getLogger("GARUFF");
 
@@ -127,12 +144,32 @@ public class Garuff {
 
 	}
 
+	public void commandInit(){
+		// load profile,prefix
+		final File basedir = new File(Minecraft.getMinecraft().gameDir, Refrence.MOD_STRING_NAME);
+		GsonProfiles profiles = new GsonProfiles(new File(basedir, "profiles"), gson);
+		Profile profile = profiles.load(modConfig.name);
+		Garuffhub.setProfiles(profiles);
+		Garuffhub.setProfile(profile);
+		profile.load();
+		printLog("Profile loaded.");
+		CommandCallHandler.register(new CommandHandler());
+		printLog("command initialized.");
+		Commands.register(new HelpCommand());
+		Commands.register(new ToggleCommand());
+		Commands.register(new PrefixCommand());
+		//Commands.register(this, new SetCommand());
+		printLog("command list loaded.");
+	}
+
+
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		Display.setTitle("Garuff " + Garuff.MOD_VERSION);
 
 		Garuff.log.info("Starting up " + Garuff.MOD_ID + " " + Garuff.MOD_VERSION + "!");
 		extClientInit();
+		commandInit();
 		Garuff.log.info("Finished initialization for " + Garuff.MOD_ID + " " + Garuff.MOD_VERSION + "!");
 		Garuff.log.info("garuff initialization finished.");
 	}
@@ -161,5 +198,8 @@ public class Garuff {
 			}
 		}
 		} catch (Exception q) { q.printStackTrace(); }
+	}
+	private static class ModConfig{
+		String name = "default";
 	}
 }

@@ -1,12 +1,12 @@
 package com.garume.Garuff.mixin.mixins;
 
+import com.garume.Garuff.event.events.event.RenderRainEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.garume.Garuff.Garuff;
-import com.garume.Garuff.event.events.RenderRainEvent;
 
 import net.minecraft.world.World;
 

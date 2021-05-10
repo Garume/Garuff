@@ -1,10 +1,10 @@
 package com.garume.Garuff.module.modules.render;
 
 
+import com.garume.Garuff.event.events.event.RenderRainEvent;
 import org.lwjgl.input.Keyboard;
 
 import com.garume.Garuff.Garuff;
-import com.garume.Garuff.event.events.RenderRainEvent;
 import com.garume.Garuff.module.Category;
 import com.garume.Garuff.module.Module;
 import com.garume.Garuff.module.setting.settings.BooleanSetting;

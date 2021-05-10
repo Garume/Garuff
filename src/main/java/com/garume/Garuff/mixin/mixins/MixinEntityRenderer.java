@@ -1,5 +1,6 @@
 package com.garume.Garuff.mixin.mixins;
 
+import com.garume.Garuff.event.events.event.RenderCameraEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -7,7 +8,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.garume.Garuff.Garuff;
-import com.garume.Garuff.event.events.RenderCameraEvent;
 import com.garume.Garuff.module.ModuleManager;
 import com.garume.Garuff.module.modules.render.NoRender;
 

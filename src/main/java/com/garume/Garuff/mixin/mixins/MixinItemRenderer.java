@@ -1,7 +1,7 @@
 package com.garume.Garuff.mixin.mixins;
 
 import com.garume.Garuff.Garuff;
-import com.garume.Garuff.event.events.TransformSideFirstPersonEvent;
+import com.garume.Garuff.event.events.event.TransformSideFirstPersonEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;

@@ -1,21 +1,23 @@
 package com.garume.Garuff.module.modules.games;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import com.garume.Garuff.module.Category;
 import com.garume.Garuff.module.Module;
+import org.lwjgl.input.Keyboard;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import net.minecraft.client.gui.GuiScreen;
 
+
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.client.event.GuiScreenEvent;
-import org.lwjgl.input.Keyboard;
-
-import java.util.ArrayList;
-import java.util.Random;
 
 public class Snake extends Module {
+    public static Snake instance;
     public static ArrayList<Integer> bodyX = new ArrayList<Integer>();
     public static ArrayList<Integer> bodyY = new ArrayList<Integer>();
     public static int snakeSize = 0;
@@ -33,7 +35,8 @@ public class Snake extends Module {
     public static int y = mc.displayHeight / 5;
 
     public Snake() {
-        super("Snake", "Shall you play Snake??", Keyboard.KEY_NONE, Category.GAME);
+        super("Snake", "Snake game",Keyboard.KEY_NONE, Category.GAME);
+        instance = this;
     }
 
     @Override
@@ -150,7 +153,7 @@ public class Snake extends Module {
     }
 
     @Override
-    public void onGuiClick(int x, int y, int button) {
+    public boolean onGuiClick(int x, int y, int button) {
         x /= 1.5;
         y /= 1.5;
 
@@ -158,7 +161,11 @@ public class Snake extends Module {
             if (gameOver == true) {
                 startGame();
             }
+
+            return true;
         }
+
+        return false;
     }
 
     @Override

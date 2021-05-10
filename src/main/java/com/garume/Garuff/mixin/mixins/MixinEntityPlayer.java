@@ -1,8 +1,8 @@
 package com.garume.Garuff.mixin.mixins;
 
 import com.garume.Garuff.Garuff;
-import com.garume.Garuff.event.events.PlayerJumpEvent;
-import com.garume.Garuff.event.events.WaterPushEvent;
+import com.garume.Garuff.event.events.event.PlayerJumpEvent;
+import com.garume.Garuff.event.events.event.WaterPushEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import org.spongepowered.asm.mixin.Mixin;

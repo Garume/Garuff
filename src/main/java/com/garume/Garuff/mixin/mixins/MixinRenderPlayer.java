@@ -1,12 +1,12 @@
 package com.garume.Garuff.mixin.mixins;
 
+import com.garume.Garuff.event.events.event.RenderEntityNameEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.garume.Garuff.Garuff;
-import com.garume.Garuff.event.events.RenderEntityNameEvent;
 
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.RenderPlayer;

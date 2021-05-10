@@ -6,6 +6,7 @@
   "mixins": [
     "AccessorRenderManager",
     "MixinEntityPlayerSP",
-    "ChatScreenMixin"
+    "ChatScreenMixin",
+    "MixinGuiChat"
   ]
 }

@@ -1,12 +1,12 @@
 package com.garume.Garuff.mixin.mixins;
 
+import com.garume.Garuff.event.events.event.CanCollideCheckEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.garume.Garuff.Garuff;
-import com.garume.Garuff.event.events.CanCollideCheckEvent;
 
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;

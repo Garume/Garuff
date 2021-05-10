@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.garume.Garuff.Garuff;
-import com.garume.Garuff.event.events.RenderEvent;
+import com.garume.Garuff.event.events.event.RenderEvent;
 import com.garume.Garuff.module.setting.Setting;
 import com.garume.Garuff.module.setting.settings.KeybindSetting;
 import com.lukflug.panelstudio.settings.Toggleable;
@@ -130,7 +130,7 @@ public class Module implements Toggleable{
 
 	public void onGuiDrawScreen(int mouseX, int mouseY, float particleTicks){}
 
-	public void onGuiClick(int x,int y, int button){}
+	public boolean onGuiClick(int x, int y, int button){return false;}
 
 	public void onGuiKeyPress(GuiScreenEvent.KeyboardInputEvent.Post e){}
 }

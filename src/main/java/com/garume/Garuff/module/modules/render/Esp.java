@@ -3,7 +3,7 @@ package com.garume.Garuff.module.modules.render;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.garume.Garuff.event.events.RenderEvent;
+import com.garume.Garuff.event.events.event.RenderEvent;
 import com.garume.Garuff.module.Category;
 import com.garume.Garuff.module.Module;
 import com.garume.Garuff.module.setting.settings.BooleanSetting;

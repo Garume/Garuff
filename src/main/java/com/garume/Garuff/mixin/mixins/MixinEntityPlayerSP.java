@@ -2,11 +2,10 @@ package com.garume.Garuff.mixin.mixins;
 
 import com.garume.Garuff.Garuff;
 import com.garume.Garuff.event.Event;
-import com.garume.Garuff.event.events.PlayerMotionUpdateEvent;
-import com.garume.Garuff.event.events.PlayerMoveEvent;
-import com.garume.Garuff.event.events.PlayerUpdateEvent;
+import com.garume.Garuff.event.events.event.PlayerMotionUpdateEvent;
+import com.garume.Garuff.event.events.event.PlayerMoveEvent;
+import com.garume.Garuff.event.events.event.PlayerUpdateEvent;
 import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.MoverType;
 
 import org.spongepowered.asm.mixin.Mixin;

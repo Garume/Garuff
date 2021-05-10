@@ -1,8 +1,8 @@
 package com.garume.Garuff.mixin.mixins;
 
 import com.garume.Garuff.Garuff;
-import com.garume.Garuff.event.events.NetworkPacketEvent;
-import com.garume.Garuff.event.events.PacketEvent;
+import com.garume.Garuff.event.events.event.NetworkPacketEvent;
+import com.garume.Garuff.event.events.event.PacketEvent;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
