@@ -16,10 +16,7 @@ import com.garume.Garuff.module.modules.player.NoSlow;
 import com.garume.Garuff.module.modules.player.Sprint;
 import com.garume.Garuff.module.modules.player.Timer;
 import com.garume.Garuff.module.modules.pvp.NotAutoCrystal;
-import com.garume.Garuff.module.modules.render.Esp;
-import com.garume.Garuff.module.modules.render.Freecam;
-import com.garume.Garuff.module.modules.render.FullBright;
-import com.garume.Garuff.module.modules.render.NoRender;
+import com.garume.Garuff.module.modules.render.*;
 import com.garume.Garuff.ui.HudEditor;
 import com.garume.Garuff.ui.clickgui.ClickGuiModule;
 import com.garume.Garuff.ui.hud.ArrayListt;
@@ -41,6 +38,7 @@ public class ModuleManager {
 		//client
 		ModuleManager.modules.add(new ClickGuiModule());
 		ModuleManager.modules.add(new ClientFont());
+		ModuleManager.modules.add(new Esp2dHelper());
 		//player
 		ModuleManager.modules.add(new Sprint());
 		ModuleManager.modules.add(new NoSlow());
@@ -57,7 +55,8 @@ public class ModuleManager {
 		ModuleManager.modules.add(new Esp());
 		ModuleManager.modules.add(new FullBright());
 		ModuleManager.modules.add(new NoRender());
-		//game
+		ModuleManager.modules.add(new ViewModel());
+				//game
 		ModuleManager.modules.add(new Snake());
 		//hud
 		ModuleManager.modules.add(new HudEditor());
@@ -83,7 +82,7 @@ public class ModuleManager {
     }
 
 	public static void onWorldRender(RenderWorldLastEvent event) {
-		Minecraft.getMinecraft().profiler.startSection("postman");
+		Minecraft.getMinecraft().profiler.startSection("garuff");
 		Minecraft.getMinecraft().profiler.startSection("setup");
 		JTessellator.prepare();
 		RenderEvent e = new RenderEvent(event.getPartialTicks());

@@ -10,6 +10,7 @@ import com.garume.Garuff.command.client.PrefixCommand;
 import com.garume.Garuff.command.client.ToggleCommand;
 import com.garume.Garuff.event.events.command.CommandCallHandler;
 import com.garume.Garuff.ui.command.CommandHandler;
+import com.garume.Garuff.ui.command.forge.ClientChatHandler;
 import com.garume.Garuff.util.api.save.*;
 import com.garume.Garuff.util.proxy.CommonProxy;
 import com.google.gson.FieldNamingPolicy;
@@ -148,12 +149,14 @@ public class Garuff {
 		// load profile,prefix
 		final File basedir = new File(Minecraft.getMinecraft().gameDir, Refrence.MOD_STRING_NAME);
 		GsonProfiles profiles = new GsonProfiles(new File(basedir, "profiles"), gson);
-		Profile profile = profiles.load(modConfig.name);
+		Profile profile = profiles.load(new ModConfig().name);
 		Garuffhub.setProfiles(profiles);
 		Garuffhub.setProfile(profile);
 		profile.load();
 		printLog("Profile loaded.");
+		MinecraftForge.EVENT_BUS.register(new ClientChatHandler());
 		CommandCallHandler.register(new CommandHandler());
+		CommandCallHandler.register(this);
 		printLog("command initialized.");
 		Commands.register(new HelpCommand());
 		Commands.register(new ToggleCommand());

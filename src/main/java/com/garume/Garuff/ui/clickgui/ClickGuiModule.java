@@ -1,6 +1,8 @@
 package com.garume.Garuff.ui.clickgui;
 
+import com.garume.Garuff.ui.Gamegui.Gamegui;
 import com.garume.Garuff.util.api.Wrapper;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Keyboard;
 
 import com.garume.Garuff.Garuff;
@@ -83,9 +85,22 @@ public class ClickGuiModule extends Module {
 
 	public void onDisable() {
 		super.onDisable();
+		for (Module module : ModuleManager.getModulesInCategory(Category.GAME)){
+			module.disable();
+		}
 		MinecraftForge.EVENT_BUS.unregister(this);
 		if(Wrapper.getMinecraft().entityRenderer.getShaderGroup() != null) {
 			Wrapper.getMinecraft().entityRenderer.getShaderGroup().deleteShaderGroup();
+		}
+	}
+	@SubscribeEvent
+	public void onTick(TickEvent.ClientTickEvent e){
+		for (Module module : ModuleManager.getModulesInCategory(Category.GAME)){
+			if (module.isOn()){
+				mc.displayGuiScreen(new Gamegui());
+				if (backgroundParticle.is("Blur")) {
+					Wrapper.getMinecraft().entityRenderer.getShaderGroup().deleteShaderGroup();}
+			}
 		}
 	}
 }
