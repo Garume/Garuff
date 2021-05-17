@@ -5,8 +5,11 @@ import com.garume.Garuff.event.events.event.RenderEvent;
 import com.garume.Garuff.module.Category;
 import com.garume.Garuff.module.Module;
 import com.garume.Garuff.module.ModuleManager;
+import com.garume.Garuff.module.modules.pvp.Surround;
 import com.garume.Garuff.util.api.render.JColor;
 import com.garume.Garuff.util.api.render.JTessellator;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -16,6 +19,8 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.Vec3d;
+
+import java.lang.reflect.Field;
 
 /*
  * original code in this is from finz0's Osiris.
@@ -32,7 +37,14 @@ public class Esp2dHelper extends Module {
 
     JColor ppColor;
     int opacityGradient;
-
+    private static final Field XPOS;
+    private static final Field YPOS;
+    private static final Field ZPOS;
+    static  {
+        XPOS = ObfuscationReflectionHelper.findField(RenderManager.class,"renderPosX");
+        YPOS = ObfuscationReflectionHelper.findField(RenderManager.class,"renderPosY");
+        ZPOS = ObfuscationReflectionHelper.findField(RenderManager.class,"renderPosZ");
+    }
     public void onWorldRender(RenderEvent event) {
         Minecraft mc = Minecraft.getMinecraft();
         //add mobs and items to 2dEsp
@@ -44,7 +56,11 @@ public class Esp2dHelper extends Module {
                 JTessellator.prepare();
                 GlStateManager.pushMatrix();
                 Vec3d pos = Surround.getInterpolatedPos(e, mc.getRenderPartialTicks());
-                GlStateManager.translate(pos.x - (mc.getRenderManager()).renderPosX, pos.y - (mc.getRenderManager()).renderPosY, pos.z - (mc.getRenderManager()).renderPosZ);
+                try {
+                    GlStateManager.translate(pos.x - (double)XPOS.get(mc.getRenderManager()), pos.y - (double)YPOS.get(mc.getRenderManager()), pos.z - (double)ZPOS.get(mc.getRenderManager()));
+                } catch (IllegalAccessException illegalAccessException) {
+                    illegalAccessException.printStackTrace();
+                }
                 GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
                 GlStateManager.rotate(-viewerYaw, 0.0F, 1.0F, 0.0F);
                 GL11.glEnable(2848);

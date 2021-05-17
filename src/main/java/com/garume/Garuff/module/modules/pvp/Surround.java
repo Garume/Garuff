@@ -1,12 +1,14 @@
 package com.garume.Garuff.module.modules.pvp;
 
 
+import static com.garume.Garuff.util.api.world.BlockUtils.faceVectorPacketInstant;
 
-import baritone.api.utils.BlockUtils;
 import com.garume.Garuff.module.Category;
 import com.garume.Garuff.module.Module;
 import com.garume.Garuff.module.setting.settings.BooleanSetting;
 import com.garume.Garuff.module.setting.settings.NumberSetting;
+import com.garume.Garuff.util.api.world.BlockUtils;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import org.lwjgl.input.Keyboard;
 
 
@@ -27,6 +29,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
+import java.lang.reflect.Field;
+
 /*
  * Almost completely stolen from gamesense. @Srgantmoomoo November 6th, 2020
  */
@@ -45,6 +49,17 @@ public class Surround extends Module {
     public Surround() {
         super ("surround", "automatically surrounds u in obby.", Keyboard.KEY_NONE, Category.PVP);
         this.addSettings(triggerSurround, shiftOnly, rotate, disableOnJump, centerPlayer, tickDelay, timeOutTicks, blocksPerTick);
+    }
+
+
+    private static final Field IN_WEB_FIELD;
+    private static final Field RIGHTCLECKDElAY_FIELD;
+
+    static{
+        IN_WEB_FIELD = ObfuscationReflectionHelper.findField(Entity.class,"isInWeb");
+        IN_WEB_FIELD.setAccessible(true);
+        RIGHTCLECKDElAY_FIELD = ObfuscationReflectionHelper.findField(Minecraft.class,"rightClickDelayTimer");
+        RIGHTCLECKDElAY_FIELD.setAccessible(true);
     }
 
     @SuppressWarnings("unused")
@@ -144,9 +159,12 @@ public class Surround extends Module {
         if (shiftOnly.isEnabled() && !mc.player.isSneaking()) {
             return;
         }
-
-        if (disableOnJump.isEnabled() && !(mc.player.onGround) && !(mc.player.isInWeb)) {
-            return;
+        try {
+            if (disableOnJump.isEnabled() && !(mc.player.onGround) && !((boolean)IN_WEB_FIELD.get(mc.player))) {
+                return;
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
 
         if (centerPlayer.isEnabled() && centeredBlock != Vec3d.ZERO && mc.player.onGround) {
@@ -298,7 +316,11 @@ public class Surround extends Module {
 
         mc.playerController.processRightClickBlock(mc.player, mc.world, neighbour, opposite, hitVec, EnumHand.MAIN_HAND);
         mc.player.swingArm(EnumHand.MAIN_HAND);
-        mc.rightClickDelayTimer = 4;
+        try {
+            RIGHTCLECKDElAY_FIELD.set(mc,4);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         return true;
     }
